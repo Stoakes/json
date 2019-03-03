@@ -11,12 +11,13 @@
 
 namespace Webmozart\Json\Tests\UriRetriever;
 
+use PHPUnit\Framework\TestCase;
 use Webmozart\Json\UriRetriever\LocalUriRetriever;
 
 /**
  * @author Bernhard Schussek <hello@webmozart.io>
  */
-class LocalUriRetrieverTest extends \PHPUnit_Framework_TestCase
+class LocalUriRetrieverTest extends TestCase
 {
     const GITHUB_SCHEMA_URL = 'https://raw.githubusercontent.com/webmozart/json/be0e18a01f2ef720008a91d047f16de1dc30030c/tests/Fixtures/schema.json';
 
@@ -66,7 +67,7 @@ BODY;
 
     public function testRetrievePassesUnmappedUrisToFallbackRetriever()
     {
-        $fallbackRetriever = $this->getMock('JsonSchema\Uri\Retrievers\UriRetrieverInterface');
+        $fallbackRetriever = $this->createMock('JsonSchema\Uri\Retrievers\UriRetrieverInterface');
 
         $fallbackRetriever->expects($this->at(0))
             ->method('retrieve')

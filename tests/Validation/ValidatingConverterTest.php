@@ -11,9 +11,9 @@
 
 namespace Webmozart\Json\Tests\Validation;
 
-use PHPUnit_Framework_Assert;
+use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject;
-use PHPUnit_Framework_TestCase;
 use Webmozart\Json\Conversion\JsonConverter;
 use Webmozart\Json\InvalidSchemaException;
 use Webmozart\Json\JsonValidator;
@@ -24,7 +24,7 @@ use Webmozart\Json\Validation\ValidatingConverter;
  *
  * @author Bernhard Schussek <bschussek@gmail.com>
  */
-class ValidatingConverterTest extends PHPUnit_Framework_TestCase
+class ValidatingConverterTest extends TestCase
 {
     /**
      * @var PHPUnit_Framework_MockObject_MockObject|JsonConverter
@@ -43,7 +43,7 @@ class ValidatingConverterTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->innerConverter = $this->getMock('Webmozart\Json\Conversion\JsonConverter');
+        $this->innerConverter = $this->createMock('Webmozart\Json\Conversion\JsonConverter');
         $this->jsonValidator = $this->getMockBuilder('Webmozart\Json\JsonValidator')
             ->disableOriginalConstructor()
             ->getMock();
@@ -120,7 +120,7 @@ class ValidatingConverterTest extends PHPUnit_Framework_TestCase
         $this->converter = new ValidatingConverter(
             $this->innerConverter,
             function ($data) use ($jsonData) {
-                PHPUnit_Framework_Assert::assertSame($jsonData, $data);
+                Assert::assertSame($jsonData, $data);
 
                 return '/dynamic/schema';
             },
@@ -196,7 +196,7 @@ class ValidatingConverterTest extends PHPUnit_Framework_TestCase
         $this->converter = new ValidatingConverter(
             $this->innerConverter,
             function ($data) use ($jsonData) {
-                PHPUnit_Framework_Assert::assertSame($jsonData, $data);
+                Assert::assertSame($jsonData, $data);
 
                 return '/dynamic/schema';
             },
